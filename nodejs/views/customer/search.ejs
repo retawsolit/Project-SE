@@ -1,0 +1,28 @@
+<div class="container">
+    <% if(!dataSp[0]) { %>
+        <p style="text-align: center;">There are no products to search for.</p>
+    <% } else { %>
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Search: <%= title %>
+        </div>
+    </div>
+    <div class="row">
+        <% dataSp.forEach((datasp) => {
+            %>
+                <div class="col-sm-3"><a href="/customer/san-pham/chi-tiet/<%= datasp.ID_LoaiSanPham %>/<%= datasp.ID %>" style="color: black;">
+                    <div class="card" style="width: 18rem;">
+                    <img src="/admin/image/<%= datasp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                    <div class="card-body">
+                        Name: <%= datasp.TenSanPham %><br>
+                        Origin: <%= datasp.XuatXu %><br>
+                        Price: <%= datasp.GiaBan %><br>
+                        Quantity:  <%= datasp.SoLuong %>
+                    </div>
+                    </div></a>
+                </div>
+            <%  
+        }) %>
+    </div>
+    <% } %>
+</div>

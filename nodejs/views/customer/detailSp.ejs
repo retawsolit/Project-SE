@@ -1,0 +1,74 @@
+<% if(!dataDetailSp[0]) { %>
+    <p style="text-align: center;">No products available</p>
+<% } else { %>
+    <div class="container" style="background: white;">
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                Product Details: <%= dataDetailSp[0].TenSanPham %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5" style="display: flex;justify-content: center;align-items: center;margin-bottom: 10px;">
+                <img src="/admin/image/<%= dataDetailSp[0].imgName %>" alt="" id="img_main" style="box-shadow: 0px 0px 5px 0px;border-radius: 5%; max-height: 245px;">
+                <div class="row" style="margin-top: 5px;">
+                </div>
+            </div>
+            <style>
+                input:focus-visible {
+                    outline: none;
+                    border: none;
+                }
+
+                input {
+                    border: none;
+                }
+            </style>
+            <div class="col-md-7">
+                <form action="/customer/san-pham/add-to-cart" method="post">
+                    <h3 style="padding-bottom: 5px;"><input type="text" name="TenSP" value="<%= dataDetailSp[0].TenSanPham %>" readonly></h3>
+                    <p>Price: <input type="text" name="DonGia" value="<%= dataDetailSp[0].GiaBan %>" readonly style="text-align: right;"><sup>$</sup> </p>
+                    <p>Origin: <input type="text" name="XuatXu" value="<%= dataDetailSp[0].XuatXu %>" readonly> </p>
+                    <p>Available Quantity: <input type="text" name="SoLuongCo" value="<%= dataDetailSp[0].SoLuong %>" readonly style="text-align: right;"></p>
+                    <p>Quantity to Buy: <input type="number" name="SoLuongMua" min="1" max="<%= dataDetailSp[0].SoLuong %>" oninput="this.value = Math.abs(this.value)" required></p>
+                    <input type="text" name="idLsp" value="<%= dataDetailSp[0].ID_LoaiSanPham %>" hidden>
+                    <input type="text" name="idSp" value="<%= dataDetailSp[0].ID %>" hidden>
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background: white;">
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                Similar Products
+            </div>
+        </div>
+        <% if(!dataSameSp[0]) { %>
+            <p style="text-align: center;">There are no similar products</p>
+        <% } else { %>
+        <div class="row">
+            <% dem = 1; dataSameSp.forEach((data) => {
+                if(dem <= 6 ){ %>
+                    <div class="col-sm-2"><a href="/customer/san-pham/chi-tiet/<%= data.ID_LoaiSanPham %>/<%= data.ID %>" style="color: black;">
+                        <div class="card" style="width: 10rem;">
+                        <img src="/admin/image/<%= data.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 250px">
+                        <div class="card-body">
+                            Name: <%= data.TenSanPham %><br>
+                            Origin: <%= data.XuatXu %><br>
+                            Price: <%= data.GiaBan %>$<br>
+                            Quantity:  <%= data.SoLuong %>
+                        </div>
+                        </div></a>
+                    </div>
+                <%  dem += 1
+                }
+            }) %>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 10px 0px;">
+            <button class="btn btn-primary me-md-2" type="button" style="background: #00e85d;border-color: #00e85d;"><a href="/customer/san-pham/loai-san-pham/<%= dataSameSp[0].ID_LoaiSanPham %>">View All <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+    

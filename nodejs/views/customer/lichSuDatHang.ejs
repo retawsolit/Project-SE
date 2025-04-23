@@ -1,0 +1,41 @@
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Order History
+        </div>
+    </div>
+
+    <h3>Order History</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>#</td>
+            <td>Recipient's Name</td>
+            <td>Address</td>
+            <td>Phone Number</td>
+            <td>Total Amount</td>
+            <td>Purchase Date</td>
+            <td>Notes</td>
+            <td>Status</td>
+        </thead>
+        <% if(!dataDonHang[0]) { %>
+            <tr>
+                <td colspan="8" style="text-align: center;">No orders yet !!!</td>
+            </tr>
+        <% } else {
+            dem = 0;
+            dataDonHang.forEach((data) => { %>
+                <tr>
+                    <td><%= dem += 1 %></td>
+                    <td><%= data.TenKH %></td>
+                    <td><%= data.DiaChi %></td>
+                    <td><%= data.SDT %></td>
+                    <td><%= data.TongTien %> <sup>$</sup></td>
+                    <td><%= data.NgayMua %></td>
+                    <td><%= data.GhiChu %></td>
+                    <td><%= data.TenTT %></td>
+                    <td><a href="/customer/don-hang/chi-tiet/<%= data.ID %>" style="color: blue;">Details</a></td>
+                </tr>
+            <% })
+        } %>
+    </table>
+</div>

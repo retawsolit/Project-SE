@@ -1,0 +1,34 @@
+<body>
+    <% dataHomeLsp.forEach((dataLsp) => { %>
+        <div class="container">
+            <div class="Tieu_de" style="margin-top: 10px;">
+                <div>
+                    <%= dataLsp.Ten %>
+                </div>
+            </div>
+            <div class="row">
+                <% dem = 1; dataHomeSp.forEach((dataSp) => {
+                    if(dataLsp.ID == dataSp.ID_LoaiSanPham && dem <= 4 ){ %>
+                        <div class="col-sm-3"><a href="/customer/san-pham/chi-tiet/<%= dataLsp.ID %>/<%= dataSp.ID %>" style="color: black;">
+                            <div class="card" style="width: 18rem;">
+                            <img src="/admin/image/<%= dataSp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                            <div class="card-body">
+                                Name: <%= dataSp.TenSanPham %><br>
+                                Origin: <%= dataSp.XuatXu %><br>
+                                Price: <%= dataSp.GiaBan %><sup>$</sup><br>
+                                Quantity:  <%= dataSp.SoLuong %>
+                            </div>
+                            </div></a>
+                        </div>
+                    <%  dem += 1
+                    }
+                }) %>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 10px 0px;">
+                <button class="btn btn-primary me-md-2" type="button" style="background: #394155;border-color: #394155;"><a href="/customer/san-pham/loai-san-pham/<%= dataLsp.ID %>">View all <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
+            </div>
+        </div>
+    <% }) %>
+        
+</body>

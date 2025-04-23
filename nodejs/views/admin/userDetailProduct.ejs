@@ -1,0 +1,79 @@
+<% if(dataDetail.length==0) { %>
+    <p style="text-align: center;">NO DATA</p>
+    <% } else { %>
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID</th>
+                <th>Account</th>
+                <th>Status</th>
+                <th>Sign up Date</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].IDTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TT %>
+                </td>
+                <td>
+                    <%= dataDetail[0].NgayDK %>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: center">
+            <input type="text" id="myInput" onkeyup="search_table_detail_user()" placeholder="Finding..."
+                title="Type in a name">
+
+        </div>
+
+        <table id="myTable">
+            <tr class="header">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Total</th>
+                <th>Purchased Date</th>
+                <th>Note</th>
+                <th>Status</th>
+                <th>More details</th>
+            </tr>
+            <% dataDetail.forEach((data)=> { %>
+                <tr>
+                    <td>
+                        <%= data.ID %>
+                    </td>
+                    <td>
+                        <%= data.TenKH %>
+                    </td>
+                    <td>
+                        <%= data.DiaChi %>
+                    </td>
+                    <td>
+                        <%= data.SDT %>
+                    </td>
+                    <td>
+                        <%= data.TongTien %>
+                    </td>
+                    <td>
+                        <%= data.NgayMua %>
+                    </td>
+                    <td>
+                        <%= data.GhiChu %>
+                    </td>
+                    <td
+                        style="color: <% if(data.TrangThai == 2){ %> #8acf18 <% } else if(data.TrangThai == 3){ %> #fe7c21 <% } %>;">
+                        <%= data.TenTT %>
+                    </td>
+                    <td><a href="/admin/receipt-detail/<%= data.ID %>">View</a></td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } %>
+            <div style="text-align: center;margin: 10px;">
+                <button><a href="/admin/user">Back</a></button>
+            </div>

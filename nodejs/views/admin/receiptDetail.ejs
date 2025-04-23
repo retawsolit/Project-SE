@@ -1,0 +1,115 @@
+<% if(dataDetail.length==0){ %>
+    <p style="text-align: center;">NO DATA</p>
+    <% }else { %>
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID</th>
+                <th>Account</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Sign Up Date</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].IDTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].MatKhau %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TTTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].NgayDK %>
+                </td>
+            </tr>
+        </table>
+
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>Bill's ID</th>
+                <th>Customer's Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Total</th>
+                <th>Purchased Date</th>
+                <th>Note</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].ID %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenKH %>
+                </td>
+                <td>
+                    <%= dataDetail[0].DiaChi %>
+                </td>
+                <td>
+                    <%= dataDetail[0].SDT %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TongTien %>$
+                </td>
+                <td>
+                    <%= dataDetail[0].NgayMua %>
+                </td>
+                <td>
+                    <%= dataDetail[0].GhiChu %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenTT %>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: center">
+            <input type="text" id="myInput" onkeyup="search_table_detail_receipt()" placeholder="Search for names.."
+                title="Type in a name">
+
+        </div>
+
+        <table id="myTable">
+            <tr class="header">
+                <th>No.</th>
+                <th>Product's ID</th>
+                <th>Product</th>
+                <th>Origin</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            <% dataDetail.forEach((data)=> { %>
+                <tr>
+                    <td>
+                        <%= STT +=1 %>
+                    </td>
+                    <td>
+                        <%= data.IDSanPham %>
+                    </td>
+                    <td>
+                        <%= data.TenSanPham %>
+                    </td>
+                    <td>
+                        <%= data.XuatXu %>
+                    </td>
+                    <td>
+                        <%= data.GiaBan %>$
+                    </td>
+                    <td>
+                        <%= data.SoLuong %>
+                    </td>
+                    <td>
+                        <%= data.ThanhTien %>$
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } %>
+            <div style="text-align: center;margin: 10px;">
+                <button><a href="/admin/user/san-pham-da-mua/<%= dataDetail[0].IDTK %>">Back</a></button>
+            </div>

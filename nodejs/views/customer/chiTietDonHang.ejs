@@ -1,0 +1,91 @@
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Order
+        </div>
+    </div>
+    <h3>Order</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Recipient Name</td>
+            <td>Address</td>
+            <td>Phone Number</td>
+            <td>Total Amount</td>
+            <td>Purchase Date</td>
+            <td>Notes</td>
+            <td>Status</td>
+        </thead>
+        <tr>
+            <td>1</td>
+            <td><%= dataDonHang[0].TenKH %></td>
+            <td><%= dataDonHang[0].DiaChi %></td>
+            <td><%= dataDonHang[0].SDT %></td>
+            <td><%= number_format(dataDonHang[0].TongTien) %> <sup>$</sup></td>
+            <td><%= dataDonHang[0].NgayMua %></td>
+            <td><%= dataDonHang[0].GhiChu %></td>
+            <td><%= dataDonHang[0].TenTT %></td>
+        </tr>
+    </table>
+</div>
+
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Order Details
+        </div>
+    </div>
+
+    <h3>Details</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Product Name</td>
+            <td>Origin</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+        </thead>
+        <% dem = 0;
+        dataChiTietDonHang.forEach((data) => { %>
+            <tr>
+                <td><%= dem += 1 %></td>
+                <td><%= data.TenSanPham %></td>
+                <td><%= data.XuatXu %></td>
+                <td><%= number_format(data.DonGia) %> <sup>$</sup></td>
+                <td><%= data.SoLuong %></td>
+                <td><%= number_format(data.ThanhTien) %> <sup>$</sup></td>
+            </tr>
+        <% }); %>
+    </table>
+</div>
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Order Details
+        </div>
+    </div>
+
+    <h3>Details</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Product Name</td>
+            <td>Origin</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+        </thead>
+        <% dem = 0;
+        dataChiTietDonHang.forEach((data) => { %>
+            <tr>
+                <td><%= dem += 1 %></td>
+                <td><%= data.TenSanPham %></td>
+                <td><%= data.XuatXu %></td>
+                <td><%= number_format(data.DonGia) %> <sup>$</sup></td>
+                <td><%= data.SoLuong %></td>
+                <td><%= number_format(data.ThanhTien) %> <sup>$</sup></td>
+            </tr>
+        <% }) %>
+    </table>
+</div>

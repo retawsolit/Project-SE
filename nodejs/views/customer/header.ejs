@@ -1,0 +1,67 @@
+<div class="container-fuild">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a href="/admin/login">
+                <img src="/images/logo.png" alt="Logo" width="50" height="50" style="margin-top: 8px;">
+            </a>            
+        </li>
+        <li>
+            <form class="d-flex" style="margin-top: 11%;" method="post" action="/customer/san-pham/search">
+                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
+                <button class="btn btn-outline-success" type="submit" style="color: white">Search</button>
+            </form>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/customer/home">Home</a>
+        </li>
+        <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Products
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% dataHeaderSp.forEach((data) => { 
+                        %>
+                        <li><a class="dropdown-item" href="/customer/san-pham/loai-san-pham/<%= data.ID %> "><%= data.Ten %></a></li>
+                    <% 
+                }) %>
+                
+            </ul>
+        </li>
+        <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Origin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% dataHeaderXx.forEach((data) => { 
+                        %>
+                        <li><a class="dropdown-item" href="/customer/san-pham/xuat-xu/<%= data.ID %> "><%= data.XuatXu %></a></li>
+                    <% 
+                }) %>
+                
+            </ul>
+        </li>
+        <% if(!sessionID) { %>
+            <li class="nav-item">
+                <button type="button" class="btn btn-success"><a href="/customer/login">Sign In</a></button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-danger"><a href="/customer/signup">Sign Up</a></button>
+            </li>
+        <% } else { %>
+            <li class="nav-item dropdown" id="dropdown">
+                <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(62, 81, 106, 0.5); color: white;border: 0px;">
+                Account: <%= sessionID.TenTK %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/customer/changePass">Change Password</a></li>
+                <li><a class="dropdown-item" href="/customer/cart">Cart</a></li>
+                <li><a class="dropdown-item" href="/customer/don-hang">Existing orders</a></li>
+                <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Order history</a></li>
+                <li><a class="dropdown-item" href="/customer/login">Log Out</a></li>
+                </ul>
+            </li>
+        <% } %>
+    </ul>
+    <script src="/customer/js/popper.min.js"></script>
+    <script src="/customer/js/bootstrap.min.js"></script>
+</div>
