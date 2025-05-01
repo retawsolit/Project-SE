@@ -10,6 +10,7 @@
   "author": "Group_Web_Dev_IU",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.9.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.8",
@@ -19,6 +20,7 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "qrcode": "^1.5.4"
   }
 }
