@@ -2,14 +2,8 @@
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a href="/admin/login">
-                <img src="/images/logo.png" alt="Logo" width="50" height="50" style="margin-top: 8px;">
+                <img src="/images/logo.png" alt="Logo" width="100" style="margin-top: 8px;">
             </a>            
-        </li>
-        <li>
-            <form class="d-flex" style="margin-top: 11%;" method="post" action="/customer/san-pham/search">
-                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit" style="color: white">Search</button>
-            </form>
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/customer/home">Home</a>
@@ -37,16 +31,22 @@
                         <li><a class="dropdown-item" href="/customer/san-pham/xuat-xu/<%= data.ID %> "><%= data.XuatXu %></a></li>
                     <% 
                 }) %>
-                
             </ul>
+        </li>
+        <li>
+            <form class="search-box" action="/customer/san-pham/search" method="get">
+                <input type="text" name="q" placeholder="Search..." />
+                <button type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>              
         </li>
         <% if(!sessionID) { %>
             <li class="nav-item">
-                <button type="button" class="btn btn-success"><a href="/customer/login">Sign In</a></button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-danger"><a href="/customer/signup">Sign Up</a></button>
-            </li>
+                <a href="/customer/login" class="nav-link signup-icon">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+              </li>              
         <% } else { %>
             <li class="nav-item dropdown" id="dropdown">
                 <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(62, 81, 106, 0.5); color: white;border: 0px;">
