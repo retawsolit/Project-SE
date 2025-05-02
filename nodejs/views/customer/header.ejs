@@ -6,7 +6,7 @@
             </a>            
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/customer/home">Home</a>
+            <a class="nav-link active" aria-current="page" href="/customer/home" style="color: #f33636">Home</a>
         </li>
         <li class="nav-item dropdown" id="dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,9 +48,14 @@
                 </a>
               </li>              
         <% } else { %>
-            <li class="nav-item dropdown" id="dropdown">
-                <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(62, 81, 106, 0.5); color: white;border: 0px;">
-                Account: <%= sessionID.TenTK %>
+            <div class="dropdown">
+                <button class="account-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="account-avatar">
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <div class="account-name">
+                        <%= sessionID.TenTK %>
+                    </div>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/customer/changePass">Change Password</a></li>
@@ -59,7 +64,7 @@
                 <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Order history</a></li>
                 <li><a class="dropdown-item" href="/customer/login">Log Out</a></li>
                 </ul>
-            </li>
+            </div>
         <% } %>
     </ul>
     <script src="/customer/js/popper.min.js"></script>

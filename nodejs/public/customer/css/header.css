@@ -4,7 +4,6 @@
     width: 100%;
     background: #ffffff;
     padding: 8px 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     margin: 0;
   }
   
@@ -25,7 +24,7 @@
   
   .container-fuild .nav-link:hover,
   .container-fuild .nav-link.active {
-    color: #f53f3f;
+    color: #ffffff;
   }
   
   .container-fuild .dropdown-toggle {
@@ -73,7 +72,7 @@
   }
   .signup-icon:hover,
   .account-button .dropdown-toggle:hover {
-    background: #000;
+    background: #767676;
   }
 
   .container-fuild ul.nav {
@@ -99,8 +98,32 @@
   }
   
   body {
-    padding-top: 60px;
+    margin-top: 100px;
   }
+
+  .account-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .account-avatar .fa-user-circle {
+    font-size: 1.8rem;
+    color: #717171;
+  }
+  
+  .account-name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #717171;
+    white-space: nowrap;
+  }
+  
   
   
   
