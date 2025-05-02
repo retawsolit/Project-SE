@@ -4,7 +4,9 @@ body {
 
 .navbar_header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
+    font-weight: bold;
+    align-items: center;
 }
 
 .navbar_header a {
@@ -14,11 +16,13 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     color: #191919;
+    font-weight: bold;
 }
 
 .dropdown_header {
     float: left;
     overflow: hidden;
+    font-weight: bold;
 }
 
 .dropdown_header .dropbtn {
@@ -33,7 +37,7 @@ body {
 
 .navbar_header a:hover,
 .dropdown_header:hover > .dropbtn {
-    background-color: #ddd;
+    color: #0080ff
 }
 
 .dropdown_header-content {
