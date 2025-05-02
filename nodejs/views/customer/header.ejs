@@ -1,7 +1,7 @@
 <div class="container-fuild">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a href="/admin/login">
+            <a href="/customer/home">
                 <img src="/images/logo.png" alt="Logo" width="100" style="margin-top: 8px;">
             </a>            
         </li>
@@ -34,8 +34,8 @@
             </ul>
         </li>
         <li>
-            <form class="search-box" action="/customer/san-pham/search" method="get">
-                <input type="text" name="q" placeholder="Search..." />
+            <form class="d-flex" action="/customer/san-pham/search" method="post" action="/customer/san-pham/search">
+                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
                 <button type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
