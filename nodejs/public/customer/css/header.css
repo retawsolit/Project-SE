@@ -24,7 +24,7 @@
   
   .container-fuild .nav-link:hover,
   .container-fuild .nav-link.active {
-    color: #ffffff;
+    color: #86c7ff;
   }
   
   .container-fuild .dropdown-toggle {
@@ -86,6 +86,12 @@
   
   .container-fuild ul.nav > li:not(:first-child) {
     margin-left: 20px;
+  }
+
+  .nav-item.dropdown:hover > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 
 .container-fuild {
