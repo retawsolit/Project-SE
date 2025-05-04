@@ -22,15 +22,22 @@
 
                 input {
                     border: none;
+                    text-align: left;
+                }
+
+                input[name="SoLuongMua"] {
+                    border: 1px solid #000000;
+                    border-radius: 4px;
+                    padding: 4px 8px;
                 }
             </style>
             <div class="col-md-7">
                 <form action="/customer/san-pham/add-to-cart" method="post">
                     <h3 style="padding-bottom: 5px;"><input type="text" name="TenSP" value="<%= dataDetailSp[0].TenSanPham %>" readonly></h3>
-                    <p>Price: <input type="text" name="DonGia" value="<%= dataDetailSp[0].GiaBan %>" readonly style="text-align: right;"><sup>$</sup> </p>
-                    <p>Origin: <input type="text" name="XuatXu" value="<%= dataDetailSp[0].XuatXu %>" readonly> </p>
-                    <p>Available Quantity: <input type="text" name="SoLuongCo" value="<%= dataDetailSp[0].SoLuong %>" readonly style="text-align: right;"></p>
-                    <p>Quantity to Buy: <input type="number" name="SoLuongMua" min="1" max="<%= dataDetailSp[0].SoLuong %>" oninput="this.value = Math.abs(this.value)" required></p>
+                    <p style="font-weight: bold;">Price: <input type="text" name="DonGia" value="<%= dataDetailSp[0].GiaBan %>" readonly style="text-align: right;"><sup>$</sup> </p>
+                    <p style="font-weight: bold;">Origin: <input type="text" name="XuatXu" value="<%= dataDetailSp[0].XuatXu %>" readonly> </p>
+                    <p style="font-weight: bold;">Available Quantity: <input type="text" name="SoLuongCo" value="<%= dataDetailSp[0].SoLuong %>" readonly style="text-align: right;"></p>
+                    <p style="font-weight: bold;">Quantity to Buy: <input type="number" name="SoLuongMua" min="1" max="<%= dataDetailSp[0].SoLuong %>" oninput="this.value = Math.abs(this.value)" required></p>
                     <input type="text" name="idLsp" value="<%= dataDetailSp[0].ID_LoaiSanPham %>" hidden>
                     <input type="text" name="idSp" value="<%= dataDetailSp[0].ID %>" hidden>
                     <button type="submit">Add to Cart</button>

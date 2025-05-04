@@ -1,18 +1,12 @@
 <div class="container-fuild">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a href="/admin/login">
-                <img src="/images/logo.png" alt="Logo" width="50" height="50" style="margin-top: 8px;">
+            <a href="/customer/home">
+                <img src="/images/logo.png" alt="Logo" width="100" style="margin-top: 8px;">
             </a>            
         </li>
-        <li>
-            <form class="d-flex" style="margin-top: 11%;" method="post" action="/customer/san-pham/search">
-                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit" style="color: white">Search</button>
-            </form>
-        </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/customer/home">Home</a>
+            <a class="nav-link active" aria-current="page" href="/customer/home" style="color: #f33636">Home</a>
         </li>
         <li class="nav-item dropdown" id="dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,20 +31,31 @@
                         <li><a class="dropdown-item" href="/customer/san-pham/xuat-xu/<%= data.ID %> "><%= data.XuatXu %></a></li>
                     <% 
                 }) %>
-                
             </ul>
+        </li>
+        <li>
+            <form class="d-flex" action="/customer/san-pham/search" method="post" action="/customer/san-pham/search">
+                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
+                <button type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>              
         </li>
         <% if(!sessionID) { %>
             <li class="nav-item">
-                <button type="button" class="btn btn-success"><a href="/customer/login">Sign In</a></button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-danger"><a href="/customer/signup">Sign Up</a></button>
-            </li>
+                <a href="/customer/login" class="nav-link signup-icon">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+              </li>              
         <% } else { %>
-            <li class="nav-item dropdown" id="dropdown">
-                <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(62, 81, 106, 0.5); color: white;border: 0px;">
-                Account: <%= sessionID.TenTK %>
+            <div class="dropdown">
+                <button class="account-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="account-avatar">
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <div class="account-name">
+                        <%= sessionID.TenTK %>
+                    </div>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/customer/changePass">Change Password</a></li>
@@ -59,7 +64,7 @@
                 <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Order history</a></li>
                 <li><a class="dropdown-item" href="/customer/login">Log Out</a></li>
                 </ul>
-            </li>
+            </div>
         <% } %>
     </ul>
     <script src="/customer/js/popper.min.js"></script>

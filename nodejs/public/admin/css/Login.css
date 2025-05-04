@@ -1,90 +1,111 @@
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:"Segoe UI",sans-serif;overflow:hidden}
+
 .register-photo {
-    /* background: #f1f7fc; */
-    padding: 149px 0
+  display: flex;
+  height:100vh;
+  position:relative;
+  background:#0B0F28;
+}
+.register-photo::before,
+.register-photo::after {
+  content:""; position:absolute; border-radius:50%; opacity:.3;
+}
+.register-photo::before {
+  width:900px; height:900px;
+  background:#151A6A;
+  top:-300px; left:-200px;
+}
+.register-photo::after {
+  width:700px; height:700px;
+  background:#2C2F7E;
+  bottom:-200px; right:-250px;
+  z-index: 0;
+  position: absolute;
 }
 
-.register-photo .image-holder {
-    display: table-cell;
-    width: auto;
-    background: url(../../Robin.png);
-    background-size: cover
+.form-container {
+  flex:1; display:flex;
+}
+.image-holder {
+  flex:1.2; position:relative;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 100%;
+  z-index: 0;
+}
+.image-holder img {
+  width:100%; height:100%; object-fit:cover;
 }
 
-.form-container{
-    box-shadow: 0px 0px 10px 1px;
-    min-height: 422px;
+.form-container form {
+  flex:.8;
+  background:#fff;
+  border-radius:26px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.1);
+  padding:40px 32px;
+  width:100%;
+  max-width:360px;
+  margin:auto;
+  position:relative;
 }
 
-.register-photo .form-container {
-    display: table;
-    max-width: 900px;
-    width: 90%;
-    margin: 0 auto;
-    /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) */
+.form-container form h2.text-center {
+  font-size:1.75rem;
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:1.5rem;
+  color:#0B0F28;
+}
+.form-container form h2 span {
+  color:#007BFF;
 }
 
-.register-photo form {
-    display: table-cell;
-    width: 400px;
-    background-color: #ffffff;
-    padding: 40px 60px;
-    color: #505e6c
+.form-group {
+  margin-bottom:1rem;
+  text-align: center;
 }
 
-@media (max-width:991px) {
-    .register-photo form {
-        padding: 40px
-    }
+.form-group .form-control {
+  height:45px;
+  padding:0 12px;
+  border:1px solid #DDD;
+  border-radius: 16px;
+  font-size:1rem;
+  transition:border-color .2s;
+}
+.form-group .form-control:focus {
+  border-color:#007BFF;
+  outline:none;
 }
 
-.register-photo form h2 {
-    font-size: 24px;
-    line-height: 1.5;
-    margin-bottom: 30px
+.form-group .btn-block {
+  display: inline-block;
+  width: auto;
 }
 
-.register-photo form .form-control {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #dfe7f1;
-    border-radius: 0;
-    box-shadow: none;
-    outline: none;
-    color: inherit;
-    text-indent: 0px;
-    height: 40px
+.btn-success {
+  background: #0077ff!important;
+  border-color: transparent!important;
+  height:45px;
+  font-size:1rem;
+  font-weight:bold;
+  border-radius: 32px;
+  transition:background .2s;
+}
+.btn-success:hover {
+  color: #020974!important; 
 }
 
-.register-photo form .form-check {
-    font-size: 13px;
-    line-height: 20px
+.form-group:last-child {
+  margin-top:.5rem;
 }
-
-.register-photo form .btn-primary {
-    background: green;
-    border: none;
-    border-radius: 4px;
-    padding: 11px;
-    box-shadow: none;
-    margin-top: 35px;
-    text-shadow: none;
-    outline: none !important
+.form-group:last-child a {
+  display:inline-block;
+  font-size:.9rem;
+  color:#555;
+  text-decoration:none;
 }
-
-.register-photo form .btn-primary:hover,
-.register-photo form .btn-primary:active {
-    background: green
-}
-
-.register-photo form .btn-primary:active {
-    transform: translateY(1px)
-}
-
-.register-photo form .already {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: #6f7a85;
-    opacity: 0.9;
-    text-decoration: none
+.form-group:last-child a:hover {
+  color:#007BFF;
 }
