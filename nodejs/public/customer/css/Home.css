@@ -7,12 +7,9 @@
     color: black;
 }
 
-/* .card-body:hover{
-    color: tomato;
-} */
-
 .card-body{
     text-align: left;
+    object-fit: cover;
 }
 
 .card {
@@ -25,7 +22,7 @@ a {
 }
 
 a:hover{
-    color: tomato;
+    color: rgb(255, 84, 84);
     ;
 }
 
@@ -36,21 +33,6 @@ a:hover{
     flex-wrap: wrap;
     justify-content: center;
 }
-
-/* .Trang {
-    display: flex;
-    list-style-type: none;
-    margin-top: 15px;
-}
-
-.Trang > li {
-    padding: 5px 15px;
-    border: 1px solid #333;
-    margin-right: 5px;
-    font-size: 10px;
-    font-weight: bold;
-    cursor: pointer;
-} */
 
 .Trang > li:hover {
     color: white;
@@ -65,4 +47,10 @@ a:hover{
 .col {
     text-align: -webkit-center;
 }
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 
