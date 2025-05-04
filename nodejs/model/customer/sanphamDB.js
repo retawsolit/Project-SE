@@ -170,40 +170,86 @@ function deleteCart(callback, data) {
       );
 }
 
-function selectFirstId(callback, idTk, data){
-    let diachi = data.DiaChiCuThe + ' - ' + data.xa + ' - ' + data.quanhuyen + ' - ' + data.tinhtp;
-    connection.query(
-        'INSERT INTO hoadon(IDTK, TenKH, DiaChi, SDT, TongTien, NgayMua, GhiChu, TrangThai) ' +
-        'VALUES (?, ?, ?, ?, ?, NOW(),?, 1) ; ',
-        [
-            idTk, data.ho_ten, diachi, data.sdt, data.tongThanhTien, data.ghi_chu
-        ],
-        function(err, results) {
-            if(err) throw err;
-            return callback(results);
+function orderCart(callback, data, idTk) {
+    const ngayMua = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    
+    // Kiểm tra và tính lại tongTien nếu cần
+    let tongTien = parseInt(data.tongTien) || 0;
+    if (!tongTien) {
+        // Nếu tongTien không hợp lệ, tính lại từ dữ liệu giỏ hàng
+        let calculatedTongTien = 0;
+        for (let i = 0; i < data.idSp.length; i++) {
+            const thanhTien = (parseInt(data.soLuong[i]) || 0) * (parseInt(data.donGia[i]) || 0);
+            calculatedTongTien += thanhTien;
         }
-      );
+        tongTien = calculatedTongTien;
+    }
+
+    const insertHoaDonQuery = `
+        INSERT INTO hoadon (IDTK, TenKH, DiaChi, SDT, NgayMua, TongTien, GhiChu, TrangThai) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+    `;
+    const hoaDonValues = [
+        idTk, 
+        data.ho_ten, 
+        data.tinhtp + ', ' + data.quanhuyen + ', ' + data.xa + (data.DiaChiCuThe ? ', ' + data.DiaChiCuThe : ''), 
+        data.sdt, 
+        ngayMua, 
+        tongTien, 
+        data.ghi_chu || ''
+    ];
+
+    connection.query(insertHoaDonQuery, hoaDonValues, (err, result) => {
+        if (err) {
+            return callback(err);
+        }
+
+        const orderId = result.insertId;
+
+        const insertChiTietQuery = `
+            INSERT INTO cthoadon (ID_HoaDon, IDSanPham, SoLuong, ThanhTien) 
+            VALUES (?, ?, ?, ?)
+        `;
+        const chiTietValues = [];
+        for (let i = 0; i < data.idSp.length; i++) {
+            const thanhTien = (parseInt(data.soLuong[i]) || 0) * (parseInt(data.donGia[i]) || 0);
+            chiTietValues.push([orderId, data.idSp[i], data.soLuong[i], thanhTien]);
+        }
+
+        let completedQueries = 0;
+        chiTietValues.forEach((values) => {
+            connection.query(insertChiTietQuery, values, (err) => {
+                if (err) {
+                    return callback(err);
+                }
+                completedQueries++;
+                if (completedQueries === chiTietValues.length) {
+                    const deleteCartQuery = `
+                        DELETE FROM giohang WHERE IDTK = ?
+                    `;
+                    connection.query(deleteCartQuery, [idTk], (err) => {
+                        if (err) {
+                            return callback(err);
+                        }
+                        callback(null, { insertId: orderId });
+                    });
+                }
+            });
+        });
+    });
 }
 
-function orderCart(callback, data, idTk) {
-    selectFirstId((data) => {
-        for (let index = 0; index < arrCart.length; index++) {
-            arrCart[index].splice(0, 0, data.insertId);
-        }
-        connection.query(
-            'INSERT INTO cthoadon(ID_HoaDon, IDSanPham, SoLuong, ThanhTien) ' +
-            'VALUES ? ;' + 
-            'DELETE FROM giohang WHERE IDTK = ?',
-            [
-                arrCart, idTk
-            ],
-            function(err, results) {
-                if(err) throw err;
-                arrCart = [];
-                return callback(results);
+function updateHoaDonStatus(orderId, status, callback) {
+    connection.query(
+        'UPDATE hoadon SET TrangThai = ? WHERE ID = ?',
+        [status, orderId],
+        function(err, results) {
+            if (err) {
+                return callback(err);
             }
-          );
-    }, idTk, data);
+            return callback(null, results);
+        }
+    );
 }
 
 function donHang(callback, idTk) {
@@ -240,7 +286,7 @@ function chiTietDonHang(callback, idDh){
     connection.query(
         'SELECT TenKH, DiaChi, SDT, TongTien, NgayMua, GhiChu, trangthai.TenTT FROM hoadon ' + 
         'INNER JOIN trangthai ON trangthai.ID = hoadon.TrangThai WHERE hoadon.ID = ? ;' + 
-        'SELECT sanpham.TenSanPham, xuatxu.XuatXu, sanpham.GiaBan as DonGia, cthoadon.SoLuong, cthoadon.ThanhTien ' +
+        'SELECT sanpham.TenSanPham, xuatxu.XuatXu, sanpham.GiaBan AS DonGia, cthoadon.SoLuong, cthoadon.ThanhTien ' +
         'FROM cthoadon ' +
         'INNER JOIN sanpham ON sanpham.ID = cthoadon.IDSanPham ' +
         'INNER JOIN xuatxu ON xuatxu.ID = sanpham.XuatXu ' +
@@ -263,11 +309,10 @@ function huyDonHang(callback, id){
             if(err) throw err;
             return callback(results);
         }
-
-    )
+    );
 }
 
 module.exports = {
     getDetail, getLoaiSanPham, getXuatXu, searchSanPham, addToCart, getCart, updateCart,
-    deleteCart, orderCart, donHang, chiTietDonHang, lichSuDonHang, huyDonHang
+    deleteCart, orderCart, updateHoaDonStatus, donHang, chiTietDonHang, lichSuDonHang, huyDonHang
 };

@@ -1,14 +1,14 @@
-const express = require('express')
+const express = require('express');
 const loginController = require('../../controller/customer/loginController');
 const homeController = require('../../controller/customer/homeController');
 const sanphamController = require('../../controller/customer/sanphamController');
 
-const route = express.Router()
+const route = express.Router();
 
-function isLogin(req, res, next){
-    if (req.cookies.dataLogin){
+function isLogin(req, res, next) {
+    if (req.cookies.dataLogin) {
         next();
-    }else{
+    } else {
         res.redirect('/customer/login');
     }
 }
@@ -36,12 +36,15 @@ const initCustomerRouter = (app) => {
     route.post('/cart/delete', isLogin, sanphamController.deleteCart);
     route.post('/cart/order', isLogin, sanphamController.orderCart);
 
+    route.get('/payment', isLogin, sanphamController.getPayment);
+    route.post('/confirm-payment/:orderId', isLogin, sanphamController.confirmPayment);
+
     route.get('/don-hang', isLogin, sanphamController.donHang);
     route.get('/don-hang/chi-tiet/:idDh', isLogin, sanphamController.chiTietDonHang);
     route.get('/don-hang/huy/:idDh', isLogin, sanphamController.huyDonHang);
     route.get('/don-hang/lich-su/', isLogin, sanphamController.lichSuDonHang);
 
     return app.use('/customer/', route);
-}
+};
 
 module.exports = initCustomerRouter;
